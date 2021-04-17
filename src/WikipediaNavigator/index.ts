@@ -7,14 +7,17 @@ const PHILOSOPHY_URL = 'https://en.wikipedia.org/wiki/Philosophy';
  * @class Responsible for controlling the recursive search for the Philosophy page
  */
 export default class WikipediaNavigator {
-  public constructor(max: number) {
+  public constructor(max: number, print?: boolean) {
     this.maxHops = max;
     this.currentHops = 0;
+    this.print = print ?? true;
   }
 
   private currentHops: number;
 
   private maxHops: number;
+
+  private print: boolean;
 
   // TODO: Memoize to avoid cycles
 
@@ -24,7 +27,7 @@ export default class WikipediaNavigator {
    * @returns Number of hops needed to reach the Philosophy page
    */
   public findPhilosophyFrom = async (url: string): Promise<number> => {
-    console.log(`${url}`);
+    if (this.print) console.log(`${url}`);
 
     // Base case for DFS
     if (url.toUpperCase() === PHILOSOPHY_URL.toUpperCase()) {
@@ -32,8 +35,8 @@ export default class WikipediaNavigator {
     }
 
     // Throw errors
-    if (this.currentHops >= 100) {
-      throw new Error('Greater than 100');
+    if (this.currentHops >= this.maxHops) {
+      throw new Error(`Could not find philosophy in ${this.maxHops} hops`);
     } else if (!this.isValid(url)) {
       throw new Error(`${url} is not a valid Https Wikipedia URL.`);
     }
