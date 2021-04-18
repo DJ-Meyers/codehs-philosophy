@@ -14,5 +14,8 @@ try {
 const navigator = new WikipediaNavigator(MAX_HOPS);
 
 navigator.findPhilosophyFrom(url)
-  .then((res) => console.log(`${res} hops`))
+  .then((res) => {
+    const hopString = res === 1 ? 'hop' : 'hops';
+    console.log(`${res} ${hopString}`);
+  })
   .catch((err) => console.log(err));
