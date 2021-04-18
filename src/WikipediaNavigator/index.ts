@@ -11,6 +11,7 @@ export default class WikipediaNavigator {
     this.maxHops = max;
     this.currentHops = 0;
     this.print = print ?? true;
+    this.memo = [];
   }
 
   private currentHops: number;
@@ -18,6 +19,8 @@ export default class WikipediaNavigator {
   private maxHops: number;
 
   private print: boolean;
+
+  private memo: string[];
 
   /**
    * Recursively search the first link of the current page until we reach the Philosophy page
@@ -37,8 +40,11 @@ export default class WikipediaNavigator {
       throw new Error(`Could not find philosophy in ${this.maxHops} hops`);
     } else if (!this.isValid(url)) {
       throw new Error(`${url} is not a valid Https Wikipedia URL.`);
+    } else if (this.memo.includes(url)) {
+      throw new Error(`${url} has already been visited, creating a loop.`);
     }
 
+    this.memo.push(url);
     this.currentHops += 1;
     return PageParser.getFirstLink(url)
       .then((res) => this.findPhilosophyFrom(res))
