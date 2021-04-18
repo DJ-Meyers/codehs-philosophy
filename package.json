@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "lint": "./node_modules/.bin/eslint",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "random": "npm run start https://en.wikipedia.org/wiki/Special:Random"
   },
   "repository": {
     "type": "git",

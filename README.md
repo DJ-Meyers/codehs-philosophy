@@ -14,7 +14,7 @@ Install the necessary dependencies with `npm install`
 
 Run `npm start https://en.wikipedia.org/wiki/Valid_Wikipedia_Url` in your terminal.
 
-Alternatively, you can run `npm run test` to see the output of the tests.
+Alternatively, you can run `npm run test` to see the output of the tests or `npm run random` to test the script on a random Wikipedia article.
 
 ## Technical Details
 
