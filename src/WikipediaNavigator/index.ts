@@ -19,8 +19,6 @@ export default class WikipediaNavigator {
 
   private print: boolean;
 
-  // TODO: Memoize to avoid cycles
-
   /**
    * Recursively search the first link of the current page until we reach the Philosophy page
    * @param url Current URL to be parsed
